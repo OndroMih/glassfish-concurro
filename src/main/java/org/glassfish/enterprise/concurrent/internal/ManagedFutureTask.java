@@ -181,7 +181,7 @@ public class ManagedFutureTask<V> extends FutureTask<V> implements Future<V> {
         if (taskDoneCallback != null) {
             taskDoneCallback.taskDone(this);
         }
-        if (taskListener != null && isCancelled()) {
+        if (taskListener != null && isCancelled()) { // FIXME: only when cancelled?!?
             try {
                 if (isContextualCallback) {
                     setupContext();

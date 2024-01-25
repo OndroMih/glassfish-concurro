@@ -41,7 +41,14 @@ import org.glassfish.enterprise.concurrent.AbstractManagedExecutorService;
 import org.glassfish.enterprise.concurrent.AbstractManagedThread;
 
 /**
- * ThreadPoolExecutor for running tasks submitted to ScheduledManagedExecutorServiceImpl.
+ * ThreadPoolExecutor for running tasks submitted to
+ * ScheduledManagedExecutorServiceImpl.
+ *
+ * FIXME: split to two clasess:
+ *
+ * one extending ScheduledThreadPoolExecutor
+ * *
+ * second using given executor
  */
 public class ManagedScheduledThreadPoolExecutor extends ScheduledThreadPoolExecutor {
 
@@ -84,7 +91,7 @@ public class ManagedScheduledThreadPoolExecutor extends ScheduledThreadPoolExecu
     /**
      * Returns current nanosecond time.
      */
-    final long now() {
+    final static long now() {
         return System.nanoTime();
     }
 
@@ -362,7 +369,7 @@ public class ManagedScheduledThreadPoolExecutor extends ScheduledThreadPoolExecu
      * to provide extended functionalities.
      */
     private class ManagedScheduledFutureTask<V>
-        extends ManagedFutureTask<V> implements RunnableScheduledFuture<V> {
+            extends ManagedFutureTask<V> implements RunnableScheduledFuture<V> {
 
         /** Sequence number to break ties FIFO */
         protected final long sequenceNumber;
