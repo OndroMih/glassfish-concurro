@@ -595,7 +595,6 @@ public class ManagedExecutorServiceAdapterTest  {
         final String classloaderName = "testInvokeAny_withListener" + new Date(System.currentTimeMillis());
         ClassloaderContextSetupProvider contextCallback = new ClassloaderContextSetupProvider(classloaderName);
         ArrayList<CallableImpl<String>> tasks = new ArrayList<>();
-        ArrayList<String>results = new ArrayList<>();
         CallableImpl<String> goodTask = null;
         ManagedTaskListenerImpl listenerForGoodTask = null;
         
@@ -914,35 +913,35 @@ public class ManagedExecutorServiceAdapterTest  {
                 new CancellationException());
     }
 
-    @Test (expected = IllegalStateException.class)
+    @Test(expected = IllegalStateException.class)
     public void testShutdown() {
         ManagedExecutorService mes = 
                 createManagedExecutor("testShutdown", null);
         mes.shutdown();
     }
     
-    @Test (expected = IllegalStateException.class)
+    @Test(expected = IllegalStateException.class)
     public void testIsShutdown() {
         ManagedExecutorService mes = 
                 createManagedExecutor("testShutdown", null);
         mes.isShutdown();
     }
     
-    @Test (expected = IllegalStateException.class)
+    @Test(expected = IllegalStateException.class)
     public void testIsShutdownNow() {
         ManagedExecutorService mes = 
                 createManagedExecutor("testShutdownNow", null);
         mes.shutdownNow();
     }
     
-    @Test (expected = IllegalStateException.class)
+    @Test(expected = IllegalStateException.class)
     public void testIsTerminated() {
         ManagedExecutorService mes = 
                 createManagedExecutor("isTerminated", null);
         mes.isTerminated();
     }
     
-    @Test (expected = IllegalStateException.class)
+    @Test(expected = IllegalStateException.class)
     public void testAwaitTermination() throws InterruptedException {
         ManagedExecutorService mes = 
                 createManagedExecutor("awaitTermination", null);

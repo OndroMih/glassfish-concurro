@@ -43,7 +43,7 @@ public class ManagedExecutorCompletionService<V> implements TaskDoneCallback {
             throw new NullPointerException();
         }
         this.executor = executor;
-        this.completionQueue = new LinkedBlockingQueue<Future<V>>();
+        this.completionQueue = new LinkedBlockingQueue<>();
     }
 
     /**

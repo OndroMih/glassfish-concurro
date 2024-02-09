@@ -155,7 +155,7 @@ public class ManagedScheduledExecutorServiceAdapterTest extends ManagedExecutorS
     /**
      * verifies that task run is delayed when scheduled using schedule(Callable, delay, unit)
      */
-    @Test 
+    @Test
     public void testSchedule_Callable_long_delay() {
         final String classloaderName = "testSchedule_Callable_long_delay" + new Date(System.currentTimeMillis());
         ClassloaderContextSetupProvider contextCallback = new ClassloaderContextSetupProvider(classloaderName);
@@ -273,7 +273,7 @@ public class ManagedScheduledExecutorServiceAdapterTest extends ManagedExecutorS
     /**
      * verifies that task run is delayed when scheduled using schedule(Runnable, delay, unit)
      */
-    @Test 
+    @Test
     public void testSchedule_Runnable_long_delay() {
         final String classloaderName = "testSchedule_Runnable_long_delay" + new Date(System.currentTimeMillis());
         ClassloaderContextSetupProvider contextCallback = new ClassloaderContextSetupProvider(classloaderName);
@@ -300,7 +300,7 @@ public class ManagedScheduledExecutorServiceAdapterTest extends ManagedExecutorS
     }
 
     @Test
-    public void testScheduleAtFixedRate()  {
+    public void testScheduleAtFixedRate() {
         final String classloaderName = "testScheduleAtFixedRate" + new Date(System.currentTimeMillis());
         ClassloaderContextSetupProvider contextCallback = new ClassloaderContextSetupProvider(classloaderName);
         TimeRecordingRunnableImpl task = new TimeRecordingRunnableImpl(null);
@@ -340,7 +340,7 @@ public class ManagedScheduledExecutorServiceAdapterTest extends ManagedExecutorS
     }
     
     @Test
-    public void testScheduleAtFixedRate_withListener()  {
+    public void testScheduleAtFixedRate_withListener() {
         final String classloaderName = "testScheduleAtFixedRate_withListener" + new Date(System.currentTimeMillis());
         ClassloaderContextSetupProvider contextCallback = new ClassloaderContextSetupProvider(classloaderName);
         ManagedTaskListenerImpl taskListener = new ManagedTaskListenerImpl();
@@ -391,7 +391,7 @@ public class ManagedScheduledExecutorServiceAdapterTest extends ManagedExecutorS
     }
     
     @Test
-    public void testScheduleWithFixedDelay()  {
+    public void testScheduleWithFixedDelay() {
         final String classloaderName = "testScheduleWithFixedDelay" + new Date(System.currentTimeMillis());
         ClassloaderContextSetupProvider contextCallback = new ClassloaderContextSetupProvider(classloaderName);
         TimeRecordingRunnableImpl task = new TimeRecordingRunnableImpl(null);
@@ -432,7 +432,7 @@ public class ManagedScheduledExecutorServiceAdapterTest extends ManagedExecutorS
     }
     
     @Test
-    public void testScheduleWithFixedDelay_withListener()  {
+    public void testScheduleWithFixedDelay_withListener() {
         final String classloaderName = "testScheduleWithFixedDelay_withListener" + new Date(System.currentTimeMillis());
         ClassloaderContextSetupProvider contextCallback = new ClassloaderContextSetupProvider(classloaderName);
         ManagedTaskListenerImpl taskListener = new ManagedTaskListenerImpl();
