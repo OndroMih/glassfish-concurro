@@ -45,7 +45,7 @@ public class VirtualThreadsManagedScheduledExecutorServiceTest extends ManagedSc
                         0,
                         new TestContextService(contextSetupProvider),
                         AbstractManagedExecutorService.RejectPolicy.ABORT);
-        return mes;
+        return mes.getAdapter();
     }
 
     /**

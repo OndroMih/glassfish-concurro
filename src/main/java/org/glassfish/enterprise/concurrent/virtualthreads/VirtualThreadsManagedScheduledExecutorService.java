@@ -15,6 +15,7 @@
  */
 package org.glassfish.enterprise.concurrent.virtualthreads;
 
+import jakarta.enterprise.concurrent.ManagedExecutorService;
 import jakarta.enterprise.concurrent.ManagedScheduledExecutorService;
 import jakarta.enterprise.concurrent.Trigger;
 import java.util.concurrent.Callable;
@@ -24,6 +25,7 @@ import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 import org.glassfish.enterprise.concurrent.ContextServiceImpl;
 import org.glassfish.enterprise.concurrent.ManagedScheduledExecutorServiceAdapter;
+import org.glassfish.enterprise.concurrent.internal.ManagedFutureTask;
 import org.glassfish.enterprise.concurrent.internal.ManagedScheduledThreadPoolExecutor;
 
 /**
@@ -35,9 +37,8 @@ import org.glassfish.enterprise.concurrent.internal.ManagedScheduledThreadPoolEx
 public class VirtualThreadsManagedScheduledExecutorService extends VirtualThreadsManagedExecutorService
         implements ManagedScheduledExecutorService {
 
-    protected final ManagedScheduledExecutorServiceAdapter scheduledAdapter; // FIXME: where to return?
-
-    protected ManagedScheduledThreadPoolExecutor threadPoolExecutor;
+    protected final ManagedScheduledExecutorServiceAdapter scheduledAdapter;
+    protected final ManagedScheduledThreadPoolExecutor threadPoolExecutor;
 
     public VirtualThreadsManagedScheduledExecutorService(String name,
             VirtualThreadsManagedThreadFactory managedThreadFactory,
@@ -112,6 +113,39 @@ public class VirtualThreadsManagedScheduledExecutorService extends VirtualThread
     @Override
     public <T> Future<T> submit(Callable<T> task) {
         return threadPoolExecutor.schedule(this, task, 0L, TimeUnit.NANOSECONDS);
+    }
+
+    @Override
+    protected <V> ManagedFutureTask<V> getNewTaskFor(Runnable r, V result) {
+        return threadPoolExecutor.newTaskFor(this, r, result);
+    }
+
+    @Override
+    protected <V> ManagedFutureTask<V> getNewTaskFor(Callable<V> callable) {
+        return threadPoolExecutor.newTaskFor(this, callable);
+    }
+
+    @Override
+    protected void executeManagedFutureTask(ManagedFutureTask<?> task) {
+        threadPoolExecutor.executeManagedTask(task);
+    }
+
+    /**
+     * Returns an adapter for ManagedExecutorService instance which has its life
+     * cycle operations disabled.
+     *
+     * @return The ManagedExecutorService instance with life cycle operations
+     * disabled for use by application components.
+     *
+     */
+    @Override
+    public ManagedScheduledExecutorServiceAdapter getAdapter() {
+        return scheduledAdapter;
+    }
+
+    @Override
+    public ManagedExecutorService getExecutorForTaskListener() {
+        return scheduledAdapter;
     }
 
     @Override

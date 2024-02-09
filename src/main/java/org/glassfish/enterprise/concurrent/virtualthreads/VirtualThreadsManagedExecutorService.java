@@ -144,7 +144,7 @@ public class VirtualThreadsManagedExecutorService extends AbstractManagedExecuto
      * components.
      *
      */
-    public ManagedExecutorServiceAdapter getAdapter() {
+    public AbstractManagedExecutorServiceAdapter getAdapter() {
         return adapter;
     }
 
@@ -190,7 +190,7 @@ public class VirtualThreadsManagedExecutorService extends AbstractManagedExecuto
     }
 
     @Override
-    protected ManagedFutureTask getNewTaskFor(Callable callable) {
+    protected <V> ManagedFutureTask<V> getNewTaskFor(Callable<V> callable) {
         Callable task = turnToTaskWithListener(callable, this);
         VirtualThreadsManagedFutureTask managedTask = new VirtualThreadsManagedFutureTask<>(this, task, parallelTasksSemaphore);
         addTaskListeners(managedTask);
